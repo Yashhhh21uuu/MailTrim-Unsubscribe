@@ -1,7 +1,0 @@
-pyproject.toml
-mailtrim_sdk/__init__.py
-mailtrim_sdk/client.py
-mailtrim_sdk.egg-info/PKG-INFO
-mailtrim_sdk.egg-info/SOURCES.txt
-mailtrim_sdk.egg-info/dependency_links.txt
-mailtrim_sdk.egg-info/top_level.txt
