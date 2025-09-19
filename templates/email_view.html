@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MailTrim - Emails</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script>
+        async function unsubscribe(sender) {
+            const res = await fetch("/unsubscribe", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ sender })
+            });
+            const data = await res.json();
+            if (data.status === "success") {
+                alert("Unsubscribed from " + data.sender);
+                location.reload();
+            } else {
+                alert("Failed to unsubscribe.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>📩 Your Emails</h1>
+    {% for email in emails %}
+        <div class="email-card">
+            <b>From:</b> {{ email.sender }} <br>
+            <b>Subject:</b> {{ email.subject }} <br>
+            {% if email.unsubscribe_link %}
+                <button onclick="unsubscribe('{{ email.sender }}')">Unsubscribe</button>
+            {% else %}
+                <button onclick="unsubscribe('{{ email.sender }}')">Block Sender</button>
+            {% endif %}
+        </div>
+        <hr>
+    {% endfor %}
+</body>
+</html>
